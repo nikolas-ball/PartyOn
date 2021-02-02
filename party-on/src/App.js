@@ -8,17 +8,8 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom";
-import {
-  Button,
-  TextField,
-  Grid,
-  Paper,
-  AppBar,
-  Typography,
-  Toolbar
-  } from "@material-ui/core";
 import styled from "styled-components";
-import logo from './img/party_on.png';
+import logo from "./img/party_on.png";
 
 // This example has 3 pages: a public page, a protected
 // page, and a login screen. In order to see the protected
@@ -37,16 +28,127 @@ import logo from './img/party_on.png';
 
 const PublicPageHolder = styled.div`
   height: 100vh;
-  background: #005AA7;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  background: #005aa7; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #fffde4,
+    #005aa7
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #fffde4,
+    #005aa7
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 `;
 
 const Logo = styled.img`
-display: block;
-margin-left: auto;
-margin-right: auto;
-width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+`;
+
+const FormHolder = styled.div`
+  background-color: #ffffff;
+  width: 400px;
+  height: 400px;
+  margin: 2em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+  @media (max-width: 600px) {
+    border-radius: 0px;
+  }
+`;
+
+const SignIn = styled.div`
+  padding-top: 40px;
+  text-align: center;
+  color: #8c55aa;
+  font-family: "Ubuntu", sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+`;
+
+const Username = styled.input`
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+`;
+
+const SignInForm = styled.form`
+  padding-top: 40px;
+`;
+
+const Password = styled.input`
+  width: 76%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+  background: rgba(136, 126, 126, 0.04);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-left: 46px;
+  text-align: center;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+`;
+
+// .un:focus, .pass:focus {
+//   border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
+// }
+const Submit = styled.a`
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #9c27b0, #e040fb);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  margin-left: 35%;
+  font-size: 13px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+`;
+
+const Forgot = styled.p`
+  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+  color: #e1bee7;
+  padding-top: 15px;
+  text-align: center;
+`;
+
+const ForgotPassword = styled.a`
+  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+  color: #e1bee7;
+  text-decoration: none;
+`;
+
+const AltLogin = styled.a`
+  color: #8c55aa;
+  text-decoration: none;
 `;
 
 export default function AuthExample() {
@@ -179,93 +281,23 @@ function PrivateRoute({ children, ...rest }) {
 function PublicPage() {
   return (
     <PublicPageHolder>
-      <div>PartyOn Public Page</div>
-      <Logo alt="PartyOn" src={logo}/>
-      <div>
-<AppBar position="static" alignitems="center" color="primary">
-<Toolbar>
-<Grid container justify="center" wrap="wrap">
-<Grid item>
-<Typography variant="h6">{"BRAND_NAME"}</Typography>
-</Grid>
-</Grid>
-</Toolbar>
-</AppBar>
-<Grid container spacing={0} justify="center" direction="row">
-<Grid item>
-<Grid
-container
-direction="column"
-justify="center"
-spacing={2}
-className="login-form"
->
-<Paper
-variant="elevation"
-elevation={2}
-className="login-background"
->
-<Grid item>
-<Typography component="h1" variant="h5">
-Sign in
-</Typography>
-</Grid>
-<Grid item>
-<form onSubmit={console.log("")}>
-<Grid container direction="column" spacing={2}>
-<Grid item>
-<TextField
-type="email"
-placeholder="Email"
-fullWidth
-name="username"
-variant="outlined"
-value=""
-// value={this.state.username}
-onChange={(event) =>
-this.setState({
-[event.target.name]: event.target.value,
-})
-}
-required
-autoFocus
-/>
-</Grid>
-<Grid item>
-<TextField
-type="password"
-placeholder="Password"
-fullWidth
-name="password"
-variant="outlined"
-// value={this.state.password}
-value=""
-onChange={(event) =>
-this.setState({
-[event.target.name]: event.target.value,
-})
-}
-required
-/>
-</Grid>
-<Grid item>
-<Button
-variant="contained"
-color="primary"
-type="submit"
-className="button-block"
->
-Submit
-</Button>
-</Grid>
-</Grid>
-</form>
-</Grid>
-</Paper>
-</Grid>
-</Grid>
-</Grid>
-</div>
+      <div style={{height: '20px'}}/>
+      <Logo alt="PartyOn" src={logo} />
+      <FormHolder>
+        <SignIn>
+          <em>Join The Party</em>
+        </SignIn>
+        <SignInForm>
+          <Username type="text" align="center" placeholder="Username" />
+          <Password type="password" align="center" placeholder="Password" />
+          <Submit align="center">Sign In</Submit>
+          <Forgot align="center">
+            <AltLogin href="#">Or you can sign in with Twitter</AltLogin>
+            <br />
+            <ForgotPassword href="#">Forgot Password?</ForgotPassword>
+          </Forgot>
+        </SignInForm>
+      </FormHolder>
     </PublicPageHolder>
   );
 }
